@@ -2,6 +2,7 @@ import { db } from "@/db"
 import { user } from "@/db/schema"
 import { auth } from "@/lib/auth"
 import { eq } from "drizzle-orm"
+import { infraRegisterUserPresenter } from "../interface/presenters/auth"
 
 export const getUserByEmail = async(email:string) => {
     const foundUser = await db.query.user.findFirst({
@@ -26,9 +27,12 @@ export const registerUserWithEmail = async({
             password,
         }
     })
+    const {name:userName,email:userEmail,id, image} = response.user
     
     return {
-        success:true,
-        message: "Usuario creado con exito"
+        id:id,
+        name:userName,
+        email:userEmail,
+        image:image
     }
 }

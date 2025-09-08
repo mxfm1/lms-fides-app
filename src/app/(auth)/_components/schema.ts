@@ -1,21 +1,27 @@
 import z from "zod";
 
 export const registerSchema = z.object({
-  name: z.string().min(1, { message: "El nombre es obligatorio" }),
-  lastName: z.string().min(1, { message: "El apellido es obligatorio" }),
-  email: z.email("Email Inválido.."),
+  name: z.string().min(1, { message: "**Requerido" }),
+  lastName: z.string(),
+  email: z.string().min(1,{message:"**Requerido"}).email({message:"**Email inválido"}),
   password: z
     .string()
-    .min(5, { message: "La contraseña debe tener al menos 5 caracteres" })
+    .min(8, { message: "**Mínimo 8 carácteres.." })
     .regex(
       /^(?=.*[A-Z])(?=.*\d).+$/,
       {
         message:
-          "La contraseña debe contener al menos una mayúscula y un número",
+          "**Debe contener al menos un número y una mayus..",
       }
     ),
-    confirmPassword: z.string()
+    confirmPassword: z.string().min(1,{message:"**Requerido.."})
 }).refine((data) => data.password === data.confirmPassword,{
-    message: "Las contraseñas no coinciden",
+    message: "**Las contraseñas no coinciden",
     path: ["confirmPassword"]
 });
+
+
+export const loginSchema = z.object({
+  email: z.string().min(1,{message:"**Requerido.."}).email({message:"Email inválido.."}),
+  password: z.string().min(1,{message:"**Requerido.."})
+})

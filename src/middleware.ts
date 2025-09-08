@@ -7,7 +7,8 @@ const protectedRoutes = [
 ]
 
 export async function middleware(req:NextRequest){
-    const sessionCookie =  getSessionCookie(req)
+    console.log("Middleware triggered")
+    const sessionCookie =  await getSessionCookie(req)
     console.log("SESSION  COOKIE",sessionCookie)
     if(!sessionCookie){
         return NextResponse.redirect(new URL("/",req.url))

@@ -1,4 +1,5 @@
 import { getUserByEmail, registerUserWithEmail } from "@/layers/infra/auth";
+import { createUserProfile } from "@/layers/infra/profile";
 
 export type emailRegisterProps = {
     name:string;
@@ -27,6 +28,7 @@ export const registerUserWithEmailUseCase = async({
 export const registerEmailUseCase = async({
     name,
     email,
+    lastName,
     password
 }:emailRegisterProps) => {
     const prevUser = await getUserByEmail(email)
@@ -34,6 +36,19 @@ export const registerEmailUseCase = async({
         throw new Error("Este correo ya ha sido utilizado..")
     }
 
-    const createdFeedback = await registerUserWithEmail({name,email,password})
-    return createdFeedback
+    const userRegisteredData = await registerUserWithEmail({name,email,password})
+    if(!userRegisteredData){
+        throw new Error("Error al registrar el usuario..")
+    }
+    const userProfile = await createUserProfile({...userRegisteredData,lastName})
+    console.log("USER PROFILE CREATED",userProfile)
+    const registerEmailPresenter = {
+        user: {
+            userRegisteredData
+        },
+        profile: {
+            userProfile
+        }
+    }
+    return  registerEmailPresenter
 }

@@ -1,51 +1,20 @@
-'use client'
+import { getSession } from "@/lib/auth/server-auth-fn";
+import HomeSection from "./_components/home-section";
+import FeedSection from "./(protected)/home/_components/feed-section";
 
-import { Button } from "@/components/ui/button";
-import AuthForm from "@/presentation/components/auth-form";
-import TestEndpoint from "@/presentation/test";
-import Image from "next/image";
-import { useSession, signIn, signUp, signOut} from "@/lib/auth-client";
-
-
-export default function Home() {
-
-  const { data:session } = useSession()
-  
-console.log("SESSION FROM USER",session)
-
-  const handleLoginOption = () => {
-    signIn.social({ provider: "google"})
-  }
-  
+export default async function Home() {
   return (
-    <>
-      <div className="mx-auto w-full h-full" >
-        {/* <AuthForm /> */}
-        <TestEndpoint />
+    <HomeWrapper />
+  )
+}
 
-        <div>
-          Bienvenido a la app
-        </div>
+async function HomeWrapper(){
+  const userData = await getSession("client")
 
-        {session ? (
-          <>
-          <div>
-            Bienvenido {session.user.name}
-          </div>
-          <Button
-            onClick={() =>  signOut()}
-          >
-            Cerrar sesion
-          </Button>
-          </>
-        ): (
-          <Button
-          onClick={handleLoginOption}
-        >
-          inicia sesion con google
-        </Button>
-        )}
-      </div>
-    </>
-  );
+  return (
+    <div className="w-full max-w-7xl flex justify-center mt-8">
+      <HomeSection isLoggedIn={!!userData} clientData={userData} />
+      <FeedSection session={!!userData}/>
+   </div>
+  )
 }

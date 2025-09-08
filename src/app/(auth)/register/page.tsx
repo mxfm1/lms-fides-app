@@ -1,4 +1,3 @@
-'use client'
 
 // 'use client'
 
@@ -54,21 +53,15 @@ import React from 'react'
 import { RegisterForm } from '../_components/forms/register-form'
 import { registerSchema } from '../_components/schema'
 import z from 'zod'
+import RegisterSection from './_components/register-section'
 
 export type registerSchemaType = z.infer <typeof registerSchema>
 
-const RegisterPage = () => {
-
-  const handleForm = async(data:registerSchemaType) => {
-    console.log("DATA",data)
-  }
-
+const RegisterPage = () => { 
   return (
-    <>
-      <RegisterForm 
-        onSubmit={handleForm}
-        />
-    </>
+    <div className='h-screen flex bg-slate-200 items-center justify-center'>
+        <RegisterSection />
+    </div>
   )
 }
 

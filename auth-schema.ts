@@ -1,15 +1,4 @@
-import {
-  pgTable,
-  text,
-  timestamp,
-  boolean,
-  integer,
-  uuid,
-  pgEnum,
-} from "drizzle-orm/pg-core";
-
-import { InferSelectModel, InferInsertModel } from "drizzle-orm";
-export const roleEnum = pgEnum("role",["user","admin"])
+import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -25,10 +14,10 @@ export const user = pgTable("user", {
   updatedAt: timestamp("updated_at")
     .$defaultFn(() => /* @__PURE__ */ new Date())
     .notNull(),
-    role: roleEnum("role").notNull().default("user"),
-    banned: boolean("banned"),
-    banReason: text("ban_reason"),
-    banExpires: timestamp("ban_expires"),
+  role: text("role"),
+  banned: boolean("banned"),
+  banReason: text("ban_reason"),
+  banExpires: timestamp("ban_expires"),
 });
 
 export const session = pgTable("session", {
@@ -42,6 +31,7 @@ export const session = pgTable("session", {
   userId: text("user_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
+  impersonatedBy: text("impersonated_by"),
 });
 
 export const account = pgTable("account", {
@@ -74,16 +64,3 @@ export const verification = pgTable("verification", {
     () => /* @__PURE__ */ new Date(),
   ),
 });
-
-//CUSTOM TABLES
-export const profile = pgTable("profile",{
-  id: uuid().primaryKey().defaultRandom(),
-  userId: text("userId").notNull().references(() => user.id,{onDelete:"cascade"}),
-  name: text("name"),
-  lastName: text("lastName"),
-  displayName: text("displayName"),
-  email: text("email").unique(),
-  imageURL: text("imageURL"),
-})
-
-export type SessionType = InferSelectModel<typeof session>
