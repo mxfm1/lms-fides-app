@@ -8,7 +8,7 @@
     - [ ] Add file uploading
 
     ------
-
+    - [ ] Create navbar with auth flow
     - [ ] fine-tune oauth | user role
     - [ ] Setup admin dashboard 
     - [ ] File upload content

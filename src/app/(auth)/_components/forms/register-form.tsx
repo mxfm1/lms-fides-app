@@ -84,18 +84,18 @@ export const  RegisterForm = ({
           <div className="mb-4">
             <div className="absolute top-2 left-4">
               {/* <BackButton href="/login" label="Volver"variant={"ghost"} /> */}
-              <Button onClick={() => switchModalType("login")} variant="ghost" className="hover:cursor-pointer">
-                <ArrowLeft />
-                <p className="text-sm">Inicia sesion</p>
+              <Button onClick={() => switchModalType("login")} variant="ghost" className="hover:cursor-pointer hover:bg-slate-200">
+                <ArrowLeft className="text-black"/>
+                <p className="text-sm text-black">Inicia sesion</p>
               </Button>
             </div>
-            <h1 className="text-2xl font-bold">Bienvenido!</h1>
+            <h1 className="text-2xl font-bold text-black">Bienvenido!</h1>
             <p className="text-sm text-muted-foreground">
               Completa los campos para continuar con el registro
             </p>
           </div>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleEmailRegister)} className="space-y-8">
+          <Form {...form} >
+            <form onSubmit={form.handleSubmit(handleEmailRegister)} className="space-y-8 text-black">
               <div className="flex gap-4">
                 <FormField 
                     name="name"
@@ -220,7 +220,7 @@ export const  RegisterForm = ({
 
               <SeparatorWithText text="o inicia sesion con" />
               <GoogleButton
-                onClick={() => onOauthLogin("google")}
+                isLoading={isLoading}
               />
             </form>
           </Form>

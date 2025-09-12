@@ -51,17 +51,21 @@ export const LoginForm = () => {
             setIsLoading(false)
         }
     }
+
+    const handleGoogleClick = () => {
+        setIsLoading(true)
+    }
     
     return (
         <div className="relative">
             <div className="flex flex-1 flex-col justify-center px-8 sm:px-16 max-w-lg shadow-lg bg-slate-50 py-8 rounded-md">
-                <div className="mb-4">
-                    <h1 className="font-bold text-2xl">Inicia sesion</h1>
+                <div className="mb-4 space-y-2">
+                    <h1 className="font-bold text-2xl text-black">Inicia sesion</h1>
                     <p className="text-sm text-muted-foreground">Bienvenido nuevamente. Inicia sesion en tu cuenta y aprende con los mejores..</p>
                 </div>
                 <div className="">
                 <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleLoginForm)} className="">
+                <form onSubmit={form.handleSubmit(handleLoginForm)} className="text-black">
                     <FormField 
                         name="email"
                         control={form.control}
@@ -117,7 +121,10 @@ export const LoginForm = () => {
                     </div>  
 
                     <SeparatorWithText text="o inicia sesion con" />
-                    <GoogleButton onClick={() =>{}} isLoading={isLoading}/>
+                    <GoogleButton 
+                        isLoading={isLoading}
+                        onStart={handleGoogleClick}
+                        />
                     </form>
                 </Form>
             </div>

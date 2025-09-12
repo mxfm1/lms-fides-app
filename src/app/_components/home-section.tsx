@@ -20,6 +20,12 @@ const HomeSection = ({
 }:HomeSectionProps) => {
 
     const { openModal,showModal,closeModal} = UseAuthModal()
+
+    const handleStartButton = () => {
+      if(!isLoggedIn){
+        openModal()
+      }
+    }
   return (
     <section className='relative py-20 lg:py-32 overflow-hidden'>
          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-accent/10" />
@@ -28,7 +34,7 @@ const HomeSection = ({
             <div className="space-y-8">
               <div className="space-y-4">
                 <Badge variant="secondary" className="bg-primary/10 text-primary border-primary/20">
-                  Certificado por ASME V 
+                  ASME V certified
                 </Badge>
                 <h1 className="text-4xl lg:text-6xl font-bold text-balance leading-tight">
                   Especialízate con nosotros en
@@ -46,6 +52,7 @@ const HomeSection = ({
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   size="lg"
+                  onClick={() => handleStartButton()}
                   className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-lg px-8"
                 >
                   Empezar a aprender

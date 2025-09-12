@@ -14,7 +14,7 @@ export function LogoutButton(){
                     toast.error(ctx.error.message)
                 },
                 onSuccess:() => {
-                    router.push("/")
+                    router.push("/profile")
                  }
             }
         })
