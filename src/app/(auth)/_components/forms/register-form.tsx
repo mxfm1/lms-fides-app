@@ -220,6 +220,7 @@ export const  RegisterForm = ({
 
               <SeparatorWithText text="o inicia sesion con" />
               <GoogleButton
+              onStart={() => setIsLoading(true)}
                 isLoading={isLoading}
               />
             </form>
