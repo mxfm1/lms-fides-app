@@ -46,7 +46,7 @@ export default function LoginModal(){
                     initial={{ x: modalType == "login" ? 0 : -50 , opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
                     exit={{ x: modalType == "login" ? 50 : 0 , opacity: 0}}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
                 >
                   {modalType === "login" && <LoginForm />}
                   {modalType === "register" && <RegisterForm />}

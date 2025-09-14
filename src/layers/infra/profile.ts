@@ -5,6 +5,9 @@ import { profile } from "@/db/schema";
 
 export const createUserProfile = async({id,email,name,lastName,image}:ProfileProps) => {
     // const new Profile 
+    if(!id || !email || !name){
+        throw new Error("Datos del usuario incompletos..")
+    }
     const [insertedProfile] =await db.insert(profile).values({
         userId:id,
         name,
