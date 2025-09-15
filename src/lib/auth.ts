@@ -57,5 +57,10 @@ export const auth = betterAuth({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
         }
+    },
+    cookieOptions: {
+        domain: process.env.PUBLIC_APP_URL?.replace(/^https?:\/\//, ""), // elimina https://
+        sameSite: "none",
+        secure: true
     }
 })
