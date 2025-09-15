@@ -26,8 +26,8 @@ export const Navbar = () => {
     //     }
     // },[data])
 
-    // if(isPending)return null
-    if (isPending) return <div className="h-16 bg-gray-100" /> 
+    if(isPending)return null
+    // if (isPending) return <div className="h-16 bg-gray-100" /> 
     const pdata = ClientDataPresenter(data)
     return <NavbarContent data={pdata} isLoggedIn={!!data} />
 }
