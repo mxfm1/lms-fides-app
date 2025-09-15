@@ -6,6 +6,8 @@ import { UseAuthModal } from "@/context/modal-auth";
 import { ClientUserData } from "@/lib/auth-client";
 import { BookOpen, Menu } from "lucide-react"
 import { MobileMenu } from "./mobile-navbar";
+import { DropdownUserButton } from "../dropdown-user-content";
+import Notification from "../notifications/notifications";
 
 type NavbarContentProps = {
   isLoggedIn: boolean;
@@ -18,8 +20,6 @@ export default function NavbarContent({
 }:NavbarContentProps){
 
     const {openModal} = UseAuthModal()
-    console.log("PROPS DATA",data,isLoggedIn)
-    console.log("production url env", process.env.PUBLIC_APP_URL)
     return (
     <nav className="border-b border-border/50 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,11 +33,14 @@ export default function NavbarContent({
               </span>
             </div>
 
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-8 ml-auto mr-20">
               {isLoggedIn && data ? (
-                <>
-                  <LogoutButton /> 
-                </>
+                <div className="flex space-x-4">
+                  <Notification />
+
+                  <DropdownUserButton data={data} /> 
+                  {/* <LogoutButton size="default" className="px-0!" variant="destructive" /> */}
+                </div>
               ) : (
                 <>
                   <NavbarItem label="Inicio" href="/"/>

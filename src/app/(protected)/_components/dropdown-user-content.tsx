@@ -1,13 +1,12 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import { DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
+import { DropdownMenu,DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { BarChart3, Bookmark, BookOpen, ChevronDown, GraduationCap, HelpCircle, LogOut, Mail, Settings, Trophy, User, User2, User2Icon, type LucideIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
-import { UserClientData } from "./navbar/navbar"
+import { ClientUserData } from "@/lib/auth-client"
 import { LogoutButton } from "@/components/buttons/logout-button"
 
-export const DropdownUserButton = ({data}:{data:UserClientData}) => {
+export const DropdownUserButton = ({data}:{data:ClientUserData}) => {
 
     const router = useRouter()
     return (
@@ -15,8 +14,8 @@ export const DropdownUserButton = ({data}:{data:UserClientData}) => {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="rounded-full p-0 w-9 h-9">
           <Avatar className="w-9 h-9">
-            <AvatarImage src={data?.image ?? undefined} alt={data?.name} />
-            <AvatarFallback>{data.name ? data?.name.charAt(0).toUpperCase() : data.image}</AvatarFallback>
+            <AvatarImage src={data?.image ?? ""} alt={data?.name} />
+            <AvatarFallback>{data?.name ? data?.name.charAt(0).toUpperCase() : data?.image}</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>

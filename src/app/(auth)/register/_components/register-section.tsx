@@ -40,7 +40,6 @@ const RegisterSection = () => {
             setIsLoading(false)
             setUserError(message)
             toast.error(message)
-            console.log(message)
         }
     }
 

@@ -70,7 +70,6 @@ export const  RegisterForm = ({
             const message = error instanceof Error ? error.message : "Error al crear el usuario.."
             setIsLoading(false)
             toast.error(message)
-            console.log(message)
         }
     }
   const onOauthLogin = (type: "google" | "apple" = "google") => {
