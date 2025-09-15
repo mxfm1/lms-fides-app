@@ -3,8 +3,10 @@ import { inferAdditionalFields } from 'better-auth/client/plugins'
 import type {auth} from '@/lib/auth'
 
 
+const isProd = process.env.NODE_ENV === "production"
+
 export const { useSession, signIn, signUp, getSession, signOut } = createAuthClient({
-    baseURL: "http://localhost:3000",
+    baseURL: isProd ? process.env.PUBLIC_APP_URL: "http://localhost:3000",
     plugins: [inferAdditionalFields<typeof auth>()]
 })
 
