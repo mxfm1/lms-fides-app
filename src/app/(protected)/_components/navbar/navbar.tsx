@@ -3,6 +3,7 @@
 import { ClientDataPresenter, useSession } from "@/lib/auth-client"
 import NavbarContent from "./navbar-content"
 import { useEffect, useState } from "react";
+import { useAuthLocalContext } from "@/context/auth-context";
 
 export type ClientDataProps ={
     id: string;
@@ -13,21 +14,8 @@ export type ClientDataProps ={
 }
 
 export const Navbar = () => {
+    const {userData,isLoggedIn,isLoading} = useAuthLocalContext()
 
-    const {data,isPending} = useSession()
-    const [isLoggedIn,setIsLoggedIn] = useState(false)
-
-    // useEffect(() => {
-    //     if(data === null){
-    //         setIsLoggedIn(false)
-            
-    //     }else{
-    //         setIsLoggedIn(true)
-    //     }
-    // },[data])
-
-    if(isPending)return null
-    // if (isPending) return <div className="h-16 bg-gray-100" /> 
-    const pdata = ClientDataPresenter(data)
-    return <NavbarContent data={pdata} isLoggedIn={!!data} />
+    if(isLoading) return <div className="h-16 bg-background/50" />
+    return <NavbarContent data={userData} isLoggedIn={isLoggedIn} />
 }

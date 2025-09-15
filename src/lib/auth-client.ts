@@ -14,7 +14,7 @@ export type ClientUserData = {
     email: string;
     image: string | null;
     role: "user" | "admin";
-} | null;
+} | null | undefined;
 
 export const ClientDataPresenter = (data:ReturnType<typeof useSession>["data"]) => {
     if(!data?.user) return undefined 
