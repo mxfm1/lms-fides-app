@@ -7,7 +7,10 @@ const isProd = process.env.NODE_ENV === "production"
 
 export const { useSession, signIn, signUp, getSession, signOut } = createAuthClient({
     baseURL: isProd ? process.env.PUBLIC_APP_URL!: "http://localhost:3000",
-    plugins: [inferAdditionalFields<typeof auth>()]
+    plugins: [inferAdditionalFields<typeof auth>()],
+    fetchOptions: {
+        credentials: "include"
+    }
 })
 
 export type ClientUserData = {

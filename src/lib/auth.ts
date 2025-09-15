@@ -6,6 +6,7 @@ import { admin } from 'better-auth/plugins'
 import { user } from "../../auth-schema";
 
 export const auth = betterAuth({
+    trustedOrigins: ["https://resilient-caramel-3cf661.netlify.app"],
     database: drizzleAdapter(db,{
         provider: "pg"
     }),
@@ -58,9 +59,9 @@ export const auth = betterAuth({
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!
         }
     },
-    cookieOptions: {
-        domain: process.env.PUBLIC_APP_URL?.replace(/^https?:\/\//, ""), // elimina https://
-        sameSite: "none",
-        secure: true
-    }
+    // cookieOptions: {
+    //     domain: process.env.PUBLIC_APP_URL?.replace(/^https?:\/\//, ""), // elimina https://
+    //     sameSite: "none",
+    //     secure: true
+    // }
 })
