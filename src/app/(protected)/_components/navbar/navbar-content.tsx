@@ -18,8 +18,7 @@ export default function NavbarContent({
 }:NavbarContentProps){
 
     const {openModal} = UseAuthModal()
-
-    // console.log("COMPONENT DATA",data,isLoggedIn)
+    console.log("PROPS DATA",data,isLoggedIn)
     return (
     <nav className="border-b border-border/50 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
