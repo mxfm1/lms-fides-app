@@ -18,12 +18,14 @@ import { Eye, EyeOff } from "lucide-react"
 import Loginbutton from "@/components/buttons/login-byutton"
 import { UseAuthModal } from "@/context/modal-auth"
 import { useRouter } from "next/navigation"
+import { useSession } from "@/lib/auth-client"
 
 export type loginFormDataType = z.infer <typeof loginSchema> 
 
 export const LoginForm = () => {
 
     const router = useRouter()
+    const { refetch} = useSession()
     const {switchModalType,closeModal} =UseAuthModal()
     const [hiddenPasswordField,setHiddenPasswordField] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
@@ -46,6 +48,7 @@ export const LoginForm = () => {
             setIsLoading(false)
         }else{
             toast.success("Hola Bienvenido nuevamente")
+            refetch()
             closeModal(true)
             router.push("/home")
             setIsLoading(false)
