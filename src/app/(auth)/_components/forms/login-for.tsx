@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { loginSchema } from "../schema"
 import z from "zod"
-import SeparatorWithText from "@/components/separator"
+import {SeparatorWithText} from "@/components/separator"
 import GoogleButton from "@/components/buttons/google-button"
 import ForgotPasswordSection from "@/components/forgot-password-section"
 import Link from "next/link"
@@ -18,12 +18,14 @@ import { Eye, EyeOff } from "lucide-react"
 import Loginbutton from "@/components/buttons/login-byutton"
 import { UseAuthModal } from "@/context/modal-auth"
 import { useRouter } from "next/navigation"
+import { useSession } from "@/lib/auth-client"
 
 export type loginFormDataType = z.infer <typeof loginSchema> 
 
 export const LoginForm = () => {
 
     const router = useRouter()
+    const { refetch} = useSession()
     const {switchModalType,closeModal} =UseAuthModal()
     const [hiddenPasswordField,setHiddenPasswordField] = useState(false)
     const [isLoading,setIsLoading] = useState(false)
@@ -46,22 +48,27 @@ export const LoginForm = () => {
             setIsLoading(false)
         }else{
             toast.success("Hola Bienvenido nuevamente")
+            refetch()
             closeModal(true)
             router.push("/home")
             setIsLoading(false)
         }
     }
+
+    const handleGoogleClick = () => {
+        setIsLoading(true)
+    }
     
     return (
         <div className="relative">
             <div className="flex flex-1 flex-col justify-center px-8 sm:px-16 max-w-lg shadow-lg bg-slate-50 py-8 rounded-md">
-                <div className="mb-4">
-                    <h1 className="font-bold text-2xl">Inicia sesion</h1>
+                <div className="mb-4 space-y-2">
+                    <h1 className="font-bold text-2xl text-black">Inicia sesion</h1>
                     <p className="text-sm text-muted-foreground">Bienvenido nuevamente. Inicia sesion en tu cuenta y aprende con los mejores..</p>
                 </div>
                 <div className="">
                 <Form {...form}>
-                <form onSubmit={form.handleSubmit(handleLoginForm)} className="">
+                <form onSubmit={form.handleSubmit(handleLoginForm)} className="text-black">
                     <FormField 
                         name="email"
                         control={form.control}
@@ -117,7 +124,10 @@ export const LoginForm = () => {
                     </div>  
 
                     <SeparatorWithText text="o inicia sesion con" />
-                    <GoogleButton onClick={() =>{}} isLoading={isLoading}/>
+                    <GoogleButton 
+                        isLoading={isLoading}
+                        onStart={handleGoogleClick}
+                        />
                     </form>
                 </Form>
             </div>

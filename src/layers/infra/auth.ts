@@ -14,25 +14,34 @@ export const getUserByEmail = async(email:string) => {
 export const registerUserWithEmail = async({
     name,
     email,
-    password
+    password,
+    role = "user"
 }:{
     name:string;
     email:string;
-    password:string
+    password:string;
+    role?:"user" | "admin";
 }) => {
     const response = await auth.api.signUpEmail({
         body: {
             name,
             email,
             password,
+            // role:role
         }
     })
-    const {name:userName,email:userEmail,id, image} = response.user
+
+    if(!response.user.id){
+        throw new Error("No se pudo registrar el usuario..")
+    }
+    // Fetch the complete user data including role from database
+    const completeUser = await getUserByEmail(email)
     
     return {
-        id:id,
-        name:userName,
-        email:userEmail,
-        image:image
+        id: completeUser?.id,
+        name: completeUser?.name,
+        email: completeUser?.email,
+        image: completeUser?.image,
+        role: completeUser?.role
     }
 }

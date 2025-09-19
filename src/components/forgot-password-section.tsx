@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import SeparatorWithText from "@/components/separator"
+import {SeparatorWithText} from "@/components/separator"
 
 const forgotPasswordSchema = z.object({
   email: z.string().email("Debes ingresar un email válido"),

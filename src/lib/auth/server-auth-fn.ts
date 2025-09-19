@@ -3,7 +3,9 @@
 import { headers } from "next/headers"
 import { auth } from "../auth"
 import { SessionType } from "@/db/schema"
+import { roleEnum } from "@/db/schema"
 
+export type RoleType = "user" | "admin"
 type FullSession = Awaited<ReturnType<typeof auth.api.getSession>>
 
 export type ClientSession = {
@@ -11,6 +13,7 @@ export type ClientSession = {
     name:string;
     email:string,
     image: string | null
+    role: RoleType
 }
 
 export async function getSession(type: "client"): Promise<ClientSession | null>;
@@ -31,5 +34,6 @@ export async function getSession(type: "server" | "client" = "server"): Promise<
         name: session.user.name,
         email: session.user.email,
         image: session.user.image ?? null,
+        role: session.user.role
     } satisfies ClientSession
 }

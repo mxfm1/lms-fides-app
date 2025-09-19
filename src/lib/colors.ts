@@ -1,0 +1,1 @@
+export const customBg = "bg-gradient-to-r from-slate-700 via-slate-900 to-black "

@@ -4,6 +4,8 @@ import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { ModalProvider } from "@/context/modal-auth";
 import LoginModal from "@/components/modals/auth-modal";
+import { Navbar } from "./(protected)/_components/navbar/navbar";
+import { AuthProvider } from "@/context/auth-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,13 +31,16 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      > 
-        <ModalProvider>
-          {children}
-          <LoginModal />
-        </ModalProvider>
+      >  
+        <AuthProvider>
+          <ModalProvider>
+            <Navbar />
+              {children}
+              <LoginModal />
+          </ModalProvider>
+        </AuthProvider>
         <Toaster
-          position="top-right"
+          position="top-center"
           toastOptions={{
             duration:2000,
             style: {

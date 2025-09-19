@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import {registerSchemaType } from "../../register/page"
-import SeparatorWithText from "@/components/separator"
+import {SeparatorWithText} from "@/components/separator"
 import GoogleButton from "@/components/buttons/google-button"
 import { ArrowLeft, Eye, EyeOff, Rocket } from "lucide-react"
 import { registerSchema } from "../schema"
@@ -70,7 +70,6 @@ export const  RegisterForm = ({
             const message = error instanceof Error ? error.message : "Error al crear el usuario.."
             setIsLoading(false)
             toast.error(message)
-            console.log(message)
         }
     }
   const onOauthLogin = (type: "google" | "apple" = "google") => {
@@ -84,18 +83,18 @@ export const  RegisterForm = ({
           <div className="mb-4">
             <div className="absolute top-2 left-4">
               {/* <BackButton href="/login" label="Volver"variant={"ghost"} /> */}
-              <Button onClick={() => switchModalType("login")} variant="ghost" className="hover:cursor-pointer">
-                <ArrowLeft />
-                <p className="text-sm">Inicia sesion</p>
+              <Button onClick={() => switchModalType("login")} variant="ghost" className="hover:cursor-pointer hover:bg-slate-200">
+                <ArrowLeft className="text-black"/>
+                <p className="text-sm text-black">Inicia sesion</p>
               </Button>
             </div>
-            <h1 className="text-2xl font-bold">Bienvenido!</h1>
+            <h1 className="text-2xl font-bold text-black">Bienvenido!</h1>
             <p className="text-sm text-muted-foreground">
               Completa los campos para continuar con el registro
             </p>
           </div>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleEmailRegister)} className="space-y-8">
+          <Form {...form} >
+            <form onSubmit={form.handleSubmit(handleEmailRegister)} className="space-y-8 text-black">
               <div className="flex gap-4">
                 <FormField 
                     name="name"
@@ -220,7 +219,8 @@ export const  RegisterForm = ({
 
               <SeparatorWithText text="o inicia sesion con" />
               <GoogleButton
-                onClick={() => onOauthLogin("google")}
+              onStart={() => setIsLoading(true)}
+                isLoading={isLoading}
               />
             </form>
           </Form>
