@@ -47,9 +47,9 @@ function SidebarContent({ user }: { user: any }) {
       <nav className="flex-1 space-y-1">
         <NavItem href="/inicio" label="Resumen" />
         <NavItem href="/solicitudes" label="Solicitudes" />
-        <NavItem href="/admin/courses" label="Cursos" />
-        <NavItem href="/admin/users" label="Usuarios" />
-        <NavItem href="/admin/analytics" label="Analíticas" />
+        <NavItem href="/cursos" label="Cursos" />
+        <NavItem href="/usuarios" label="Usuarios" />
+        <NavItem href="/analiticas" label="Analíticas" />
       </nav>
 
       <div className="mt-6 text-xs text-muted-foreground">
