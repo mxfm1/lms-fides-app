@@ -1,5 +1,5 @@
 import { UseAuthModal } from "@/context/modal-auth"
-import { Home, Mail, Menu, type LucideIcon} from "lucide-react"
+import { BookOpen, FileText, Home, Mail, Menu, Settings, User, Users, type LucideIcon} from "lucide-react"
 import { SheetContent,Sheet, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Button } from "@/components/ui/button"
 import { DropdownUserButton } from "../dropdown-user-content"
@@ -33,8 +33,12 @@ export  const MobileMenu = ({
           <div className="flex flex-col gap-4 mt-6 h-full">
             {isLoggedIn ? (
               <>
-                <MobileSidebarItem label="Inicio" href="/home" icon={Home}/>
-                <MobileSidebarItem label="Inicio" href="/home" icon={Home}/>
+                <MobileSidebarItem label="Inicio" href="/home" icon={Home} />
+              <MobileSidebarItem label="Solicitudes" href="/requests" icon={FileText} />
+              <MobileSidebarItem label="Cursos" href="/courses" icon={BookOpen} />
+              <MobileSidebarItem label="Usuarios" href="/users" icon={Users} />
+              <MobileSidebarItem label="Perfil" href="/profile" icon={User}/>
+              <MobileSidebarItem label="Configuraciones" href="/settings" icon={Settings} />
 
                 <div className="mt-auto mb-4">
                     <LogoutButton className="bg-red-500" onLoggedOut={() => setIsOpen(false)}/>
@@ -42,10 +46,7 @@ export  const MobileMenu = ({
               </>
             ) : (
               <>
-                <MobileSidebarItem label="Inicio" href="/home" icon={Home}/>
-                <MobileSidebarItem label="Inicio" href="/home" icon={Home}/>
-                <MobileSidebarItem label="Inicio" href="/home" icon={Home}/>
-                <MobileSidebarItem label="Inicio" href="/home" icon={Home}/>
+               
                 
   
                 <div className="mt-auto flex gap-2">
